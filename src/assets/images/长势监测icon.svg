@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>长势监测icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01-01智慧土壤-土壤样本分析" transform="translate(-16.000000, -344.000000)">
+            <g id="左侧菜单">
+                <g id="分组" transform="translate(0.000000, 328.000000)">
+                    <g id="长势监测icon" transform="translate(16.000000, 16.000000)">
+                        <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                        <g id="长势预测" transform="translate(0.000000, 1.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                            <polygon id="路径" points="0 0 1.3 0 1.3 14 0 14"></polygon>
+                            <path d="M16,12.7 L16,14 L0,14 L0,12.7 L16,12.7 Z M3.67201001,9.81710237 L2.794,9.14912383 L6.13294613,5.28641488 L9.09126229,7.39458233 L13.9161666,1.81710237 L14.794,2.48541234 L9.27919282,8.86029064 L6.32105328,6.75245461 L3.67201001,9.81710237 Z" id="形状"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
