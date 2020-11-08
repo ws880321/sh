@@ -26,11 +26,7 @@ export default {
         return {
           legend: ["标签", "标签2"],
           xData: [1, 2, 3],
-          yData: [
-            [1, 2, 3],
-            [1, 2, 3],
-            [1, 2, 3],
-          ],
+          yData: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
         };
       },
     },
@@ -39,7 +35,6 @@ export default {
     option: function() {
       let legend = this.cdata ? this.cdata.legend : ["标签", "标签2"];
       let xData = this.cdata ? this.cdata.xData : [1, 2, 3];
-      console.log(this.cdata, 999);
       return {
         color: ["#73A0FA", "#73DEB3", "#FFB761"],
         tooltip: {
@@ -108,7 +103,7 @@ export default {
                 type: "bar",
                 data: this.cdata.yData[i],
                 barWidth: 10,
-                barGap: 0, //柱间距离
+                barGap: 1, //柱间距离
                 label: {
                   //图形上的文本标签
                   normal: {

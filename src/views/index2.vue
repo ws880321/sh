@@ -31,7 +31,9 @@
   </div>
 </template>
 <script>
-import Map from "../components/map/indexpointer";
+// import Map from "../components/map/indexpointer";
+
+import Map from "../components/map/olmap";
 
 export default {
   data() {
@@ -47,7 +49,7 @@ export default {
 
 <style lang="less" scoped>
 .lebged {
-  width: 130px;
+  width: 140px;
   position: fixed;
   right: 30px;
   bottom: 30px;
@@ -73,7 +75,7 @@ export default {
     }
     .label {
       display: inline-block;
-      width: 65px;
+      width: 75px;
     }
   }
   .item1 .icon {

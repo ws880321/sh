@@ -44,15 +44,15 @@
           />各个国家月度温度
         </h3>
         <div class="r-content">
-          <LineArea :cdata="data2" v-if="data2.length" />
-          <a-result v-else title="暂无数据"></a-result>
+          <LineArea :cdata="data2" />
+          <!-- <a-result v-else title="暂无数据"></a-result> -->
         </div>
       </div>
       <div class="r-box" v-if="type == 2">
         <h3><img src="../assets/images/建议icon.svg" alt="" />各个国家湿度</h3>
         <div class="r-content">
-          <bar :cdata="data3" v-if="data4.legend.length" />
-          <a-result v-else title="暂无数据"></a-result>
+          <bar :cdata="data4" />
+          <!-- <a-result v-else title="暂无数据"></a-result> -->
         </div>
       </div>
       <div class="r-box" v-if="type == 2">
@@ -60,8 +60,8 @@
           <img src="../assets/images/建议icon.svg" alt="" />各个国家湿度趋势
         </h3>
         <div class="r-content">
-          <bar :cdata="data3" v-if="data3.legend.length" />
-          <a-result v-else title="暂无数据"></a-result>
+          <LineArea :cdata="data3" />
+          <!-- <a-result v-else title="暂无数据"></a-result> -->
         </div>
       </div>
     </rightbar>
@@ -80,7 +80,7 @@ export default {
       type: 1,
       time: 1,
       data1: [],
-      data2: [],
+      data2: null,
       data3: [],
       data4: [],
     };
@@ -114,7 +114,7 @@ export default {
       });
       return {
         legend: Array.from(legend),
-        xData: Array.from(xData),
+        xData: Array.from(xData).sort((a, b) => a - b),
         yData: yData,
       };
     },
@@ -131,7 +131,7 @@ export default {
           v.value = v.value ? v.value : 0;
           return v;
         });
-        console.log(data[0].keyValues, 8181);
+        console.log(this.data3);
       });
     },
   },

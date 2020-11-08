@@ -5,6 +5,6 @@ export const TIMEOUT = 3000
 export const STATUS = 'status' // 后台返回的状态码，如 code status 这些
 
 export const baseURL = {
-    dev: 'http://222.128.56.122:8081/shanghaispatial',
-    prod: 'http://222.128.56.122:8081/shanghaispatial'
+    dev: window.baseURL,
+    prod: window.baseURL
 }

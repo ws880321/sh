@@ -11,7 +11,7 @@
       @update:zoom="zoomUpdate"
     >
       <l-tile-layer :url="url" />
-      <!-- <l-protobuf :url="url2" :options="options" ref="res" /> -->
+      <l-protobuf :url="url3" :options="options" ref="res" />
       <l-marker
         :lat-lng="item.latlng"
         v-for="(item, i) in cdata"
@@ -68,7 +68,7 @@ export default {
       zoom: 2,
       center: latLng(0, 91.219482),
       url: "http://222.128.56.122:8081/wordIMG/{z}/{x}/{y}.jpg",
-      url3: "/pbf/qqbjx/tile/{z}/{x}/{y}.pbf",
+      url3: "/qqbjx/tile/{z}/{x}/{y}.pbf",
       url2:
         "https://basemaps.arcgis.com/v1/arcgis/rest/services/World_Basemap/VectorTileServer/tile/{z}/{y}/{x}.pbf",
 
@@ -79,9 +79,9 @@ export default {
       currentCenter: latLng(47.41322, -1.219482),
       showParagraph: false,
       mapOptions: {
-        zoomSnap: 0.5,
-        zoomControl: false,
-        attributionControl: false,
+        // zoomSnap: 0.5,
+        // zoomControl: false,
+        // attributionControl: false,
       },
       options: {
         vectorTileLayerStyles: {

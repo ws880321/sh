@@ -19,6 +19,8 @@
         "leaflet-geotiff": "^0.2.0",
         "leaflet.chinatmsproviders": "^2.0.3",
         "moment": "^2.24.0",
+        "ol": "^6.4.3",
+        "openlayers_echart": "^1.1.2",
         "plotty": "^0.4.0",
         "qs": "^6.7.0",
         "tiff": "^3.0.1",
