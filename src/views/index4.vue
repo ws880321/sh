@@ -47,7 +47,7 @@
   </div>
 </template>
 <script>
-import Map from "../components/map/index2";
+import Map from "../components/map/olmap-pointer";
 import BarChart from "../components/echarts/bar";
 import LineArea from "../components/echarts/line";
 import getData from "../assets/js/xhr/data4";

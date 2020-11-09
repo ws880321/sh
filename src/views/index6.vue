@@ -124,7 +124,7 @@
   </div>
 </template>
 <script>
-import Map from "../components/map/indexpointer";
+import Map from "../components/map/olmap";
 import BarChart from "../components/echarts/dbbar";
 import LineChart from "../components/echarts/line";
 import LineBarChart from "../components/echarts/barline";

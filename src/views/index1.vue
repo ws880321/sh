@@ -59,7 +59,7 @@
 </template>
 <script>
 const _ = require("lodash");
-import Map from "../components/map/indexpointer";
+import Map from "../components/map/olmap-pointer.vue";
 import BarChart from "../components/echarts/bar";
 
 import rightbar from "../components/rightbar/index.vue";

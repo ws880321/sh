@@ -70,7 +70,7 @@
   </div>
 </template>
 <script>
-import Map from "../components/map/index2";
+import Map from "../components/map/olmap";
 import BarChart from "../components/echarts/dbbar";
 import LineChart from "../components/echarts/line";
 import getData from "../assets/js/xhr/data5";

@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-import Map from "../components/map/index";
+import Map from "../components/map/olmap";
 import LineC from "../components/echarts/line";
 import Pie from "../components/echarts/pie";
 import Bar from "../components/echarts/bar";

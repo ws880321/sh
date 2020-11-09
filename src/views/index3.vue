@@ -68,7 +68,7 @@
   </div>
 </template>
 <script>
-import Map from "../components/map/index";
+import Map from "../components/map/olmap-pointer";
 import LineArea from "../components/echarts/line";
 import bar from "../components/echarts/bar";
 import getData from "../assets/js/xhr/data3";

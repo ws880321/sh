@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-import Map from "../components/map/index";
+import Map from "../components/map/olmap-pointer";
 import Radar from "../components/echarts/radar";
 import Dbline from "../components/echarts/line";
 import rightbar from "../components/rightbar/index.vue";

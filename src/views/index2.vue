@@ -33,7 +33,7 @@
 <script>
 // import Map from "../components/map/indexpointer";
 
-import Map from "../components/map/olmap";
+import Map from "../components/map/olmap-pointer";
 
 export default {
   data() {
