@@ -4,7 +4,7 @@ const productionGzipExtensions = ["js", "css"];
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-    publicPath: "/",
+    publicPath: "./",
     chainWebpack: (config) => {
         config.optimization.splitChunks({
             chunks: "all",

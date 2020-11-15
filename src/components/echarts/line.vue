@@ -25,11 +25,7 @@ export default {
         return {
           legend: ["标签1", "标签2", "标签3"],
           xData: [1, 2, 3],
-          yData: [
-            [1, 21, 3],
-            [1, 2, 3],
-            [11, 2, 3],
-          ],
+          yData: [[1, 21, 3], [1, 2, 3], [11, 2, 3]],
         };
       },
     },
@@ -47,7 +43,7 @@ export default {
           left: "10",
           right: "5",
           bottom: "5",
-          top: "25",
+          top: "45",
           containLabel: true,
         },
         legend: {

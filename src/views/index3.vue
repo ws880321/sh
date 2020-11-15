@@ -24,7 +24,7 @@
         </a-select>
       </a-col>
     </a-row>
-    <Map />
+    <Map :pointers="points" />
 
     <rightbar>
       <div class="r-box" v-if="type == 1">
@@ -83,6 +83,7 @@ export default {
       data2: null,
       data3: [],
       data4: [],
+      points: [],
     };
   },
   methods: {
@@ -131,7 +132,14 @@ export default {
           v.value = v.value ? v.value : 0;
           return v;
         });
-        console.log(this.data3);
+        this.points = res.data[0].kpiItems[1].keyValues.map((v) => {
+          return {
+            name: v.name,
+            value: v.value,
+            point: v.tag ? v.tag.split(",") : [],
+          };
+        });
+        console.log(res.data[0].kpiItems[3]);
       });
     },
   },

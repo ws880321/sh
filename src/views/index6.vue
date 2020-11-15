@@ -126,7 +126,7 @@
 <script>
 import Map from "../components/map/olmap";
 import BarChart from "../components/echarts/dbbar";
-import LineChart from "../components/echarts/line";
+import LineChart from "../components/echarts/line2";
 import LineBarChart from "../components/echarts/barline";
 import zoom from "../components/dazoom/index";
 import getData from "../assets/js/xhr/data6";

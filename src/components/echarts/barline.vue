@@ -1,5 +1,5 @@
 <template>
-    <v-chart :options="options" :autoresize="true"/>
+  <v-chart :options="options" :autoresize="true" />
 </template>
 
 <style scoped>
@@ -14,109 +14,106 @@
 </style>
 
 <script>
-import 'echarts/lib/chart/bar'
-import 'echarts/lib/chart/line'
-import 'echarts/lib/component/polar'
+import "echarts/lib/chart/bar";
+import "echarts/lib/chart/line";
+import "echarts/lib/component/polar";
 export default {
-  components: {
-  },
-  props:{
-    cdata:{
-      default:()=>{
+  components: {},
+  props: {
+    cdata: {
+      default: () => {
         return {
-			xData:[1,2],
-			yData:[[1,21,3],[1,2,3],[11,2,3],[11,2,3]]
-        }
-      }
-    }
+          xData: [1, 2],
+          yData: [[1, 21, 3], [1, 2, 3], [11, 2, 3], [11, 2, 3]],
+        };
+      },
+    },
   },
-  computed:{
-      options:function(){
-          let yData=this.cdata?this.cdata.yData:[[1,21,3],[1,2,3],[11,2,3],[11,2,3]]
-          return  {
-             color: ['#73A0FA', '#73DEB3', '#FFB761'],
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        crossStyle: {
-                            color: '#999'
-                        }
-                    }
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {show: true, readOnly: false},
-                        magicType: {show: true, type: ['line', 'bar']},
-                        restore: {show: true},
-                        saveAsImage: {show: true}
-                    }
-                },
-                legend: {
-                    data: ['死亡人数','治愈人数','死亡率','治愈率']
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        data:this.cdata?this.cdata.xData:[],
-                        axisPointer: {
-                            type: 'shadow'
-                        }
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                        min: 0,
-                        axisLabel: {
-                            textStyle: {
-                                fontStyle: 'normal',
-                                fontFamily: '微软雅黑',
-                                fontSize: 12,
-                            }
-                        },
-                    },
-                    {
-                        type: 'value',
-                        min: 0,
-                        interval: 1,
-                        axisLabel: {
-                            formatter: '{value}'
-                        }
-                    }
-                ],
-                series: [
-                    {
-                        name: '死亡人数',
-                        type: 'bar',
-                        data: yData[0]
-                    },
-                    {
-                        name: '治愈人数',
-                        type: 'bar',
-                        data: yData[1]
-                    },
-                    {
-                        name: '死亡率',
-                        type: 'line',
-                        yAxisIndex: 1,
-                        data:  yData[2]
-                    },
-                    {
-                        name: '治愈率',
-                        type: 'line',
-                        yAxisIndex: 1,
-                        data:  yData[3]
-                    }
-                ]
-            }
-
-        }
+  computed: {
+    options: function() {
+      let yData = this.cdata
+        ? this.cdata.yData
+        : [[1, 21, 3], [1, 2, 3], [11, 2, 3], [11, 2, 3]];
+      return {
+        color: ["#73A0FA", "#73DEB3", "#FFB761"],
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "cross",
+            crossStyle: {
+              color: "#999",
+            },
+          },
+        },
+        grid: {
+          left: "1%",
+          right: "4%",
+          bottom: "6%",
+          top: 30,
+          containLabel: true,
+        },
+        legend: {
+          data: ["死亡人数", "治愈人数", "死亡率", "治愈率"],
+        },
+        xAxis: [
+          {
+            type: "category",
+            data: this.cdata ? this.cdata.xData : [],
+            axisPointer: {
+              type: "shadow",
+            },
+          },
+        ],
+        yAxis: [
+          {
+            type: "value",
+            min: 0,
+            axisLabel: {
+              textStyle: {
+                fontStyle: "normal",
+                fontFamily: "微软雅黑",
+                fontSize: 12,
+              },
+            },
+          },
+          {
+            type: "value",
+            min: 0,
+            interval: 1,
+            axisLabel: {
+              formatter: "{value}",
+            },
+          },
+        ],
+        series: [
+          {
+            name: "死亡人数",
+            type: "bar",
+            data: yData[0],
+          },
+          {
+            name: "治愈人数",
+            type: "bar",
+            data: yData[1],
+          },
+          {
+            name: "死亡率",
+            type: "line",
+            yAxisIndex: 1,
+            data: yData[2],
+          },
+          {
+            name: "治愈率",
+            type: "line",
+            yAxisIndex: 1,
+            data: yData[3],
+          },
+        ],
+      };
+    },
   },
-  data () {
-    return {}
-  }
-}
+  data() {
+    return {};
+  },
+};
 </script>
-
-

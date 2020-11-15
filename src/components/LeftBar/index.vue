@@ -51,7 +51,7 @@
 			<span v-if='!collapsed'>全球各国疫情现状信息展示</span>	
 			</router-link>
           </a-menu-item>
-		       <a-menu-item key="7">
+		       <!-- <a-menu-item key="7">
             <router-link to="/7" class="zjli">
 			   <span class="icon-n icon-time"></span>
 			<span v-if='!collapsed'>全球疫情风险等级展示</span>	
@@ -62,7 +62,7 @@
 			   <span class="icon-n icon-time"></span>
 			<span v-if='!collapsed'>邮轮航线入境信息</span>	
 			</router-link>
-          </a-menu-item>
+          </a-menu-item> -->
 		  
         </a-menu>
       </happy-scroll>
