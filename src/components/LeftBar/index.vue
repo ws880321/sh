@@ -17,38 +17,38 @@
 		   <a-menu-item key="1">
             <router-link to="/" class="zjli">
 			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>海关截获的全球各国入境信息展示</span>	
+			<span v-if='!collapsed'>海关截获入境信息</span>	
 			</router-link>
           </a-menu-item>
 
 		     <a-menu-item key="2">
             <router-link to="/2" class="zjli">
 			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>全国各国卫生防疫水平展示</span>	
+			<span v-if='!collapsed'>各国卫生防疫等级</span>	
 			</router-link>
           </a-menu-item>
 		     <a-menu-item key="3">
             <router-link to="/3" class="zjli">
 			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>全球各国基本信息展示</span>	
+			<span v-if='!collapsed'>各国基本信息展示</span>	
 			</router-link>
           </a-menu-item>
 		     <a-menu-item key="4">
             <router-link to="/4" class="zjli">
 			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>全球各国入境航班航线信息展示</span>	
+			<span v-if='!collapsed'>入境航班航线信息</span>	
 			</router-link>
           </a-menu-item>
 		     <a-menu-item key="5">
             <router-link to="/5" class="zjli">
 			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>全球各国入境航班人员信息展示</span>	
+			<span v-if='!collapsed'>入境航班人员统计</span>	
 			</router-link>
           </a-menu-item>
 		       <a-menu-item key="6">
             <router-link to="/6" class="zjli">
 			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>全球各国疫情现状信息展示</span>	
+			<span v-if='!collapsed'>各国疫情现状信息</span>	
 			</router-link>
           </a-menu-item>
 		       <!-- <a-menu-item key="7">
@@ -238,9 +238,11 @@ export default {
 	display: flex;
 	text-align: left;
 	padding: 0 !important;
-	justify-content: flex-start;
+  justify-content: flex-start;
+
 	span{
-		width: 200px;
+    width: 200px;
+    font-size: 16px;
 		display: inline-block;
 	}
     a {
@@ -307,6 +309,9 @@ export default {
     background: url(../../assets/images/数据大屏.svg) no-repeat center;
     transform: scale(1.2);
   }
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item{
+  margin:15px 0;
 }
 </style>
 

@@ -16,6 +16,7 @@
 <script>
 import "echarts/lib/chart/line";
 import "echarts/lib/component/legend";
+import "echarts/lib/component/legendScroll";
 import "echarts/lib/component/polar";
 export default {
   components: {},
@@ -49,8 +50,9 @@ export default {
         legend: {
           data: legend,
           show: true,
-          left: 30,
+          left: 10,
           top: 0,
+          type: "scroll",
         },
         xAxis: {
           type: "category",
@@ -70,6 +72,7 @@ export default {
         },
         yAxis: {
           type: "value",
+          min: 0,
           axisLabel: {
             textStyle: {
               fontSize: 12,

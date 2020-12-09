@@ -199,6 +199,6 @@ export default {
   }
 }
 .r-content {
-  height: 200px;
+  height: 250px;
 }
 </style>
