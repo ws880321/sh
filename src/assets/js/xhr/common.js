@@ -25,7 +25,7 @@ const jb = (params) => {
         "districtCode": "",
         "isUnion": false
     }
-    return xhr.post('/shanghaiexecute/execute', {...p })
+    return xhr.post('/shanghaiexecute/execute', { ...p })
 }
 
 const zm = (params) => {
@@ -52,6 +52,6 @@ const zm = (params) => {
         "districtCode": "流感",
         "isUnion": false
     }
-    return xhr.post('/shanghaiexecute/execute', {...p })
+    return xhr.post('/shanghaiexecute/execute', { ...p })
 }
 export { jb, zm }

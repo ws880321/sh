@@ -1,8 +1,10 @@
 // 海关截获的全球各国入境信息展示
 
 import xhr from './api';
-const getData = (jd = "流感", time = "2020-01-01,2020-03-01") => {
+const getData = (jd = "person_entry_disease_lxxgm", time = "2020-01-01,2020-03-01") => {
     let districtCode = jd + "," + time
+
+
     let p = {
         "classifyFilter": {
             "buildTree": false,
@@ -23,9 +25,9 @@ const getData = (jd = "流感", time = "2020-01-01,2020-03-01") => {
             "useParentId": false,
             "useParentIds": false
         },
-        "districtCode": districtCode,
+        "districtCode": districtCode,//疾病是接口返回的数据下拉框选取的和全球疫情数据不一样需要注意一下
         "isUnion": false
     }
-    return xhr.post('/shanghaiexecute/execute', {...p })
+    return xhr.post('/shanghaiexecute/execute', { ...p })
 }
 export default getData
