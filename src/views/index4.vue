@@ -12,7 +12,7 @@
           <img
             src="../assets/images/指标统计icon.svg"
             alt=""
-          />各海关截获的确诊人员总量
+          />全球各国入境的航班数量统计
         </h3>
         <div class="r-content">
           <BarChart :cdata="data1" v-if="data1.length" />
@@ -24,31 +24,31 @@
           <img
             src="../assets/images/指标变化趋势icon.svg"
             alt=""
-          />各海关截获的确诊人员发展趋势
+          />全球各国入境航班的发展趋势
         </h3>
         <div class="r-content">
           <LineArea :cdata="data2" v-if="data2.length" />
           <a-result v-else title="暂无数据"></a-result>
         </div>
       </div>
-      <div class="r-box">
+      <!-- <div class="r-box">
         <h3>
           <img
             src="../assets/images/建议icon.svg"
             alt=""
           />各海关截获的各类疾病总量统计
         </h3>
-        <!-- <div class="r-content"> -->
-        <!-- <LineArea :cdata="data3" v-if="data3.legend.length" />
+       <div class="r-content">
+        <LineArea :cdata="data3" v-if="data3.legend.length" />
           <a-result v-else title="暂无数据"></a-result>
-        </div> -->
-      </div>
+        </div> 
+      </div> -->
     </rightbar>
   </div>
 </template>
 <script>
 import Map from "../components/map/olmap-pointer";
-import BarChart from "../components/echarts/bar";
+import BarChart from "../components/echarts/bar2";
 import LineArea from "../components/echarts/line";
 import getData from "../assets/js/xhr/data4";
 import rightbar from "../components/rightbar/index.vue";
@@ -97,15 +97,18 @@ export default {
     upData(time) {
       getData(time).then((res) => {
         let data = res.data[0].kpiItems;
-
-        this.data1 = data[0].keyValues;
+        if (data[0].keyValues.length > 10) {
+          this.data1 = data[0].keyValues.splice(0, 9);
+        } else {
+          this.data1 = data[0].keyValues;
+        }
 
         this.data2 = this.getLineData(data[1]);
       });
     },
   },
   mounted() {
-    // this.upData(this.time);
+    this.upData(this.time);
   },
   components: {
     Map,

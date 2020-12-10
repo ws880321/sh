@@ -85,6 +85,34 @@ export default {
       data3: null,
     };
   },
+  methods: {
+    getLineData(data) {
+      let legend = new Set();
+      let xData = new Set();
+      data.keyValues.map((v, i) => {
+        legend.add(v.name);
+        let x = v.tag;
+        xData.add(x);
+      });
+
+      let yData = Array.from(legend).map((v) => []);
+
+      Array.from(legend).forEach((v, i) => {
+        yData[i] = data.keyValues
+          .map((k) => {
+            if (v == k.name) {
+              return k.value ? k.value : "0";
+            }
+          })
+          .filter((v) => !!v);
+      });
+      return {
+        legend: Array.from(legend),
+        xData: Array.from(xData).sort((a, b) => a - b),
+        yData: yData,
+      };
+    },
+  },
   mounted() {
     getData().then((res) => {
       let data = res.data[0].kpiItems;
@@ -122,21 +150,18 @@ export default {
         yData: yData2,
       };
 
-      console.log(res);
       let legend3 = new Set();
       let xData3 = [
-        "1月",
-        "2月",
-        "3月",
-        "4月",
-        "5月",
-        "6月",
-        "7月",
-        "8月",
-        "9月",
-        "10月",
-        "11月",
-        "12月",
+        "10",
+        "20",
+        "30",
+        "40",
+        "50",
+        "60",
+        "70",
+        "80",
+        "90",
+        "100",
       ];
       data[2].keyValues.map((v, i) => {
         legend3.add(v.name);
@@ -149,7 +174,7 @@ export default {
         yData3[i] = [];
         data[2].keyValues
           .map((k) => {
-            if (v == k.name) {
+            if (k.name && v == k.name) {
               length = k.value.split(",").length;
               yData3[i] = k.value.split(",");
             }
@@ -161,6 +186,8 @@ export default {
         xData: xData3.splice(0, length),
         yData: yData3,
       };
+      // this.data3 = this.getLineData(data[2]);
+      // console.log(this.data3);
     });
   },
   components: {

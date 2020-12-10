@@ -7,7 +7,7 @@
           <a-select-option :value="2">湿度</a-select-option>
         </a-select>
       </a-col>
-      <a-col :xs="12" :sm="12" :md="22" :lg="4" xl="4">
+      <!-- <a-col :xs="12" :sm="12" :md="22" :lg="4" xl="4">
         <a-select class="select-ty" :defaultValue="1" @change="timeChange">
           <a-select-option :value="1">1月</a-select-option>
           <a-select-option :value="2">2月</a-select-option>
@@ -22,7 +22,7 @@
           <a-select-option :value="11">11月</a-select-option>
           <a-select-option :value="12">12月</a-select-option>
         </a-select>
-      </a-col>
+      </a-col> -->
     </a-row>
     <Map :pointers="points" />
 
@@ -32,7 +32,9 @@
           <img src="../assets/images/指标统计icon.svg" alt="" />各个国家温度
         </h3>
         <div class="r-content">
-          <bar :cdata="data1" v-if="data1.length" />
+          <!-- <bar :cdata="data1" v-if="data1.length" /> -->
+
+          <LineArea :cdata="data1" v-if="data1" />
           <a-result v-else title="暂无数据"></a-result>
         </div>
       </div>
@@ -51,7 +53,8 @@
       <div class="r-box" v-if="type == 2">
         <h3><img src="../assets/images/建议icon.svg" alt="" />各个国家湿度</h3>
         <div class="r-content">
-          <bar :cdata="data4" />
+          <LineArea :cdata="data4" />
+          <!-- <bar :cdata="data4" /> -->
           <!-- <a-result v-else title="暂无数据"></a-result> -->
         </div>
       </div>
@@ -99,7 +102,8 @@ export default {
       let xData = new Set();
       data.keyValues.map((v, i) => {
         legend.add(v.name);
-        xData.add(v.tag);
+        let x = v.tag;
+        xData.add(x);
       });
 
       let yData = Array.from(legend).map((v) => []);
@@ -108,7 +112,7 @@ export default {
         yData[i] = data.keyValues
           .map((k) => {
             if (v == k.name) {
-              return k.value;
+              return k.value ? k.value : "0";
             }
           })
           .filter((v) => !!v);
@@ -122,23 +126,27 @@ export default {
     upData() {
       getData(this.time).then((res) => {
         let data = res.data[0].kpiItems;
-        this.data1 = data[1].keyValues.map((v) => {
-          v.value = v.value ? v.value : 0;
-          return v;
-        });
-        this.data2 = this.getLineData(data[0]);
-        this.data3 = this.getLineData(data[2]);
-        this.data4 = data[3].keyValues.map((v) => {
-          v.value = v.value ? v.value : 0;
-          return v;
-        });
-        this.points = res.data[0].kpiItems[1].keyValues.map((v) => {
-          return {
-            name: v.name,
-            value: v.value,
-            point: v.tag ? v.tag.split(",") : [],
-          };
-        });
+        // this.data1 = data[1].keyValues.map((v) => {
+        //   v.value = v.value ? v.value : 0;
+        //   return v;
+        // });
+        console.log(data[4]);
+        this.data1 = this.getLineData(data[2]);
+        this.data2 = this.getLineData(data[3]);
+        this.data3 = this.getLineData(data[5]);
+
+        this.data4 = this.getLineData(data[4]);
+        // this.data4 = data[3].keyValues.map((v) => {
+        //   v.value = v.value ? v.value : 0;
+        //   return v;
+        // });
+        // this.points = res.data[0].kpiItems[1].keyValues.map((v) => {
+        //   return {
+        //     name: v.name,
+        //     value: v.value,
+        //     point: v.tag ? v.tag.split(",") : [],
+        //   };
+        // });
         console.log(res.data[0].kpiItems[3]);
       });
     },

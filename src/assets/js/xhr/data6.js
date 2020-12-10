@@ -1,6 +1,6 @@
 // 海关截获的全球各国入境信息展示
 
-import xhr from './api';
+import xhr from './api2';
 const getData = (jd = "流感", time = "2020-10-27,2020-10-30") => {
     let districtCode = jd + "," + time
     let p = {
@@ -28,4 +28,11 @@ const getData = (jd = "流感", time = "2020-10-27,2020-10-30") => {
     }
     return xhr.post('/shanghaiexecute/execute', {...p })
 }
-export default getData
+const jb = () => {
+    return xhr.get('/Quarantine/findDiseaseTypes?key=shwj-828874x242')
+}
+const d1 = (name, startTime, endTime) => {
+    return xhr.get(`/Quarantine/findGlobalQuarantineTotal?name=${name}&startTime=${startTime}&endTime=${endTime}&key=shwj-828874x242`)
+}
+
+export { jb, d1 }

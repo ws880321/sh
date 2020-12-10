@@ -8,3 +8,7 @@ export const baseURL = {
     dev: window.baseURL,
     prod: window.baseURL
 }
+export const baseURL2 = {
+    dev: window.baseURL2,
+    prod: window.baseURL2
+}

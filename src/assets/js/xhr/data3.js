@@ -1,7 +1,7 @@
 // 海关截获的全球各国入境信息展示
 
 import xhr from './api';
-const getData = (params = 1) => {
+const getData = (params = '') => {
     let p = {
         "classifyFilter": {
             "buildTree": false,

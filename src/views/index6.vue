@@ -4,11 +4,11 @@
       <a-col :xs="12" :sm="12" :md="4" :lg="4" xl="4">
         <a-select class="select-ty" @change="selectChange">
           <a-select-option
-            :value="item.name"
+            :value="item"
             v-for="(item, index) in jb"
             :key="index"
           >
-            {{ item.name }}
+            {{ item }}
           </a-select-option>
         </a-select>
       </a-col>
@@ -129,9 +129,9 @@ import BarChart from "../components/echarts/dbbar";
 import LineChart from "../components/echarts/line2";
 import LineBarChart from "../components/echarts/barline";
 import zoom from "../components/dazoom/index";
-import getData from "../assets/js/xhr/data6";
+import { jb, d1 } from "../assets/js/xhr/data6";
 
-import { jb, zm } from "../assets/js/xhr/common";
+import { zm } from "../assets/js/xhr/common";
 import rightbar from "../components/rightbar/index.vue";
 export default {
   data() {
@@ -144,14 +144,13 @@ export default {
       t6: 0,
       t7: 0,
       t8: 0,
-      jibing: "流感",
+      jibing: "",
       data3: null,
       data2: null,
       data1: null,
       jb: [],
       zm: [],
-      jibing: "流感",
-      time: "2020-10-30,2020-10-30",
+      time: ["", "2021-12-12"],
     };
   },
   methods: {
@@ -159,7 +158,8 @@ export default {
       this.upData(e, this.time);
     },
     timeChange(a, e) {
-      this.time = e.join();
+      console.log(e);
+      this.time = e;
       this.upData(this.jibing, this.time);
     },
     getLineData(data) {
@@ -252,13 +252,15 @@ export default {
   },
   mounted() {
     jb().then((res) => {
-      this.jb = res.data[0].kpiItems[0].keyValues;
+      this.jb = res.data;
     });
-
+    d1(this.jibing, ...this.time).then((res) => {
+      console.log(res, 2222);
+    });
     zm().then((res) => {
       this.zm = res.data[0].kpiItems[0].keyValues.map((v) => v.value);
     });
-    this.upData(this.jibing, this.time);
+    // this.upData(this.jibing, this.time);
   },
   components: {
     Map,
