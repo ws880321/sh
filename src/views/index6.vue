@@ -20,14 +20,14 @@
           <div class="item">
             <a-statistic
               title="新增确诊"
-              :value="t1"
+              :value="topData.diagnum"
               :value-style="{ color: '#ff3300' }"
             />
           </div>
           <div class="item">
             <a-statistic
               title="累计确诊"
-              :value="t3"
+              :value="topData.totaldiagnum"
               :value-style="{ color: '#ff3300' }"
             />
           </div>
@@ -38,17 +38,17 @@
           <div class="item">
             <a-statistic
               title="累计治愈"
-              :value="t5"
+              :value="topData.incident"
               :value-style="{ color: 'green' }"
             />
           </div>
           <div class="item">
-            <a-statistic title="累计死亡" :value="t7" />
+            <a-statistic title="累计死亡" :value="topData.totaldeadnum" />
           </div>
         </a-card>
       </a-col>
     </a-row>
-    <zoom :dataYears="zm" @callBack="zoomchange" />
+    <!-- <zoom :dataYears="zm" @callBack="zoomchange" /> -->
     <Map />
 
     <rightbar>
@@ -72,7 +72,8 @@
           />全球各国死亡人数及治愈人数(万人)统计TOP10
         </h3>
         <div class="r-content">
-          <LineBarChart :cdata="data2" v-if="data2" />
+          <BarChart :cdata="data2" v-if="data2" />
+          <!-- <LineBarChart :cdata="data2" v-if="data2" /> -->
           <a-result v-else title="暂无数据"></a-result>
         </div>
       </div>
@@ -129,7 +130,7 @@ import BarChart from "../components/echarts/dbbar";
 import LineChart from "../components/echarts/line2";
 import LineBarChart from "../components/echarts/barline";
 import zoom from "../components/dazoom/index";
-import { jb, d1 } from "../assets/js/xhr/data6";
+import { jb, d1, d2, d3, d4 } from "../assets/js/xhr/data6";
 
 import { zm } from "../assets/js/xhr/common";
 import rightbar from "../components/rightbar/index.vue";
@@ -148,19 +149,30 @@ export default {
       data3: null,
       data2: null,
       data1: null,
+      topData: {
+        diagnum: 0,
+        incident: 0,
+        totaldeadnum: "0",
+        totaldiagnum: "0",
+      },
       jb: [],
       zm: [],
-      time: ["", "2021-12-12"],
+      time: ["2019-12-12", "2020-12-12"],
     };
   },
   methods: {
+    // getData() {
+    //   d1(this.jibing, ...this.time).then((res) => {
+    //     this.topData = res.datas;
+    //   });
+    // },
     selectChange(e) {
-      this.upData(e, this.time);
+      this.jibing = e;
+      this.upData();
     },
     timeChange(a, e) {
-      console.log(e);
-      this.time = e;
-      this.upData(this.jibing, this.time);
+      // this.time = e;
+      this.upData();
     },
     getLineData(data) {
       let legend = new Set();
@@ -229,37 +241,95 @@ export default {
       return { xData: Array.from(xData), yData: yData };
     },
     upData(jbc, time) {
-      getData(jbc, time).then((res) => {
-        if (res.code != 200) return;
-        let data = res.data[0].kpiItems;
-        Object.assign(this, {
-          t1: data[3].keyValues[0].value
-            ? data[3].keyValues[0].value.toFixed(0)
-            : 0,
-          t3: data[0].keyValues[0].value.toFixed(0),
-          t5: data[2].keyValues[0].value.toFixed(0),
-          t7: data[1].keyValues[0].value.toFixed(0),
-        });
-        this.data1 = this.getBArData(data[4]);
-        this.data2 = this.getBarLineData(data[5]);
-        this.data3 = this.getLineData(data[6]);
+      d1(this.jibing, ...this.time).then((res) => {
+        if (res.code == 200 && res.data) {
+          this.topData = res.data;
+        } else {
+          this.topData = {
+            diagnum: 0,
+            incident: 0,
+            totaldeadnum: 0,
+            totaldiagnum: 0,
+          };
+        }
       });
+      d2(this.jibing, ...this.time).then((res) => {
+        if (res.code == 200 && res.data.length > 0) {
+          let legend = ["新增", "累计"];
+
+          let xData = res.data.map((v) => v.country);
+          let yData = Array.from(legend).map((v) => []);
+          yData[0] = res.data.map((v) => v.newDiagnum);
+
+          yData[1] = res.data.map((v) => v.diagnum);
+          this.data1 = {
+            legend: legend,
+            xData: xData,
+            yData: yData,
+          };
+        } else {
+          this.data1 = null;
+        }
+      });
+      d3(this.jibing, ...this.time).then((res) => {
+        if (res.code == 200 && res.data.length > 0) {
+          let legend = ["死亡", "治愈"];
+
+          let xData = res.data.map((v) => v.country);
+          let yData = Array.from(legend).map((v) => []);
+          yData[0] = res.data.map((v) => v.totaldeadnum);
+
+          yData[1] = res.data.map((v) => v.incident);
+          this.data2 = {
+            legend: legend,
+            xData: xData,
+            yData: yData,
+          };
+        } else {
+          this.data2 = null;
+        }
+      });
+      d4(this.jibing, ...this.time).then((res) => {
+        if (res.code == 200 && res.data.length > 0) {
+          console.log(res, 999);
+        } else {
+          this.data2 = null;
+        }
+      });
+      // getData(jbc, time).then((res) => {
+      //   if (res.code != 200) return;
+      //   let data = res.data[0].kpiItems;
+      //   Object.assign(this, {
+      //     t1: data[3].keyValues[0].value
+      //       ? data[3].keyValues[0].value.toFixed(0)
+      //       : 0,
+      //     t3: data[0].keyValues[0].value.toFixed(0),
+      //     t5: data[2].keyValues[0].value.toFixed(0),
+      //     t7: data[1].keyValues[0].value.toFixed(0),
+      //   });
+      //   this.data1 = this.getBArData(data[4]);
+      //   this.data2 = this.getBarLineData(data[5]);
+      //   this.data3 = this.getLineData(data[6]);
+      // });
     },
     zoomchange(e) {
-      this.time = e + "," + e;
-      this.upData(this.jibing, this.time);
+      this.time = [e, e];
+      this.upData();
     },
   },
   mounted() {
     jb().then((res) => {
-      this.jb = res.data;
+      if (res.code == 200) {
+        this.jb = res.data;
+        this.jibing = res.data[1];
+      }
+
+      this.upData();
     });
-    d1(this.jibing, ...this.time).then((res) => {
-      console.log(res, 2222);
-    });
-    zm().then((res) => {
-      this.zm = res.data[0].kpiItems[0].keyValues.map((v) => v.value);
-    });
+
+    // zm().then((res) => {
+    //   this.zm = res.data[0].kpiItems[0].keyValues.map((v) => v.value);
+    // });
     // this.upData(this.jibing, this.time);
   },
   components: {

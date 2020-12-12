@@ -34,5 +34,15 @@ const jb = () => {
 const d1 = (name, startTime, endTime) => {
     return xhr.get(`/Quarantine/findGlobalQuarantineTotal?name=${name}&startTime=${startTime}&endTime=${endTime}&key=shwj-828874x242`)
 }
+const d2 = (name, startTime, endTime) => {
+    return xhr.get(`/Quarantine/findGlobalQuarantineDiag?name=${name}&startTime=${startTime}&endTime=${endTime}&key=shwj-828874x242`)
+}
+const d3 = (name, startTime, endTime) => {
+    return xhr.get(`/Quarantine/findGlobalQuarantineDead?name=${name}&startTime=${startTime}&endTime=${endTime}&key=shwj-828874x242`)
+}
+const d4 = (name, startTime, endTime) => {
+    return xhr.get(`/Quarantine/getDiagnumTrend?name=${name}&startTime=${startTime}&endTime=${endTime}&key=shwj-828874x242`)
+}
 
-export { jb, d1 }
+
+export { jb, d1, d2, d3, d4 }

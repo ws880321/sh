@@ -118,8 +118,8 @@ export default {
           .filter((v) => !!v);
       });
       return {
-        legend: Array.from(legend),
-        xData: Array.from(xData).sort((a, b) => a - b),
+        legend: Array.from(legend).splice(0, 9),
+        xData: Array.from(xData),
         yData: yData,
       };
     },
