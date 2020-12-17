@@ -13,44 +13,45 @@
           @openChange="onOpenChange"
           @select="select"
         >
-		
+         <a-menu-item key="6">
+            <router-link to="/6" class="zjli">
+			   <span class="new-icon new-icon1"></span>
+            <span v-if='!collapsed'>各国疫情现状信息</span>	
+            </router-link>
+          </a-menu-item>
+          	     <a-menu-item key="4">
+            <router-link to="/4" class="zjli">
+			   <span class="new-icon new-icon2"></span>
+			<span v-if='!collapsed'>入境航班航线信息</span>	
+			</router-link>
+          </a-menu-item>
+		     <a-menu-item key="5">
+            <router-link to="/5" class="zjli">
+			   <span class="new-icon new-icon3"></span>
+			<span v-if='!collapsed'>入境航班人员统计</span>	
+			</router-link>
+          </a-menu-item>
 		   <a-menu-item key="1">
             <router-link to="/" class="zjli">
-			   <span class="icon-n icon-time"></span>
+			   <span class="new-icon new-icon4"></span>
 			<span v-if='!collapsed'>海关截获入境信息</span>	
 			</router-link>
           </a-menu-item>
 
 		     <a-menu-item key="2">
             <router-link to="/2" class="zjli">
-			   <span class="icon-n icon-time"></span>
+			   <span class="new-icon new-icon5"></span>
 			<span v-if='!collapsed'>各国卫生防疫等级</span>	
 			</router-link>
           </a-menu-item>
 		     <a-menu-item key="3">
             <router-link to="/3" class="zjli">
-			   <span class="icon-n icon-time"></span>
+			   <span class="new-icon new-icon6"></span>
 			<span v-if='!collapsed'>各国基本信息展示</span>	
 			</router-link>
           </a-menu-item>
-		     <a-menu-item key="4">
-            <router-link to="/4" class="zjli">
-			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>入境航班航线信息</span>	
-			</router-link>
-          </a-menu-item>
-		     <a-menu-item key="5">
-            <router-link to="/5" class="zjli">
-			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>入境航班人员统计</span>	
-			</router-link>
-          </a-menu-item>
-		       <a-menu-item key="6">
-            <router-link to="/6" class="zjli">
-			   <span class="icon-n icon-time"></span>
-			<span v-if='!collapsed'>各国疫情现状信息</span>	
-			</router-link>
-          </a-menu-item>
+	
+		      
 		       <!-- <a-menu-item key="7">
             <router-link to="/7" class="zjli">
 			   <span class="icon-n icon-time"></span>
@@ -188,7 +189,7 @@ export default {
   .logo {
     width: 100%;
 
-      background-color: #343949;
+    background-color: #343949;
     height: 56px;
     font-size: 18px;
     display: flex;
@@ -227,24 +228,55 @@ export default {
 
   .icon-n {
     display: inline-block;
-    width: 46px!important;
+    width: 46px !important;
     height: 100%;
     min-height: 40px;
     background-size: 80% 80%;
     position: relative;
   }
-
+  .new-icon {
+    display: inline-block;
+    width: 46px !important;
+    height: 100%;
+    min-height: 40px;
+    background-size: 80% 80%;
+    position: relative;
+    &.new-icon1 {
+      background: url(../../assets/images/new-icon1.svg) no-repeat center;
+      background-size: 50% 50%;
+    }
+     &.new-icon2 {
+      background: url(../../assets/images/new-icon2.svg) no-repeat center;
+      background-size: 50% 50%;
+    }
+      &.new-icon3{
+      background: url(../../assets/images/new-icon4.svg) no-repeat center;
+      background-size: 50% 50%;
+    }
+       &.new-icon4{
+      background: url(../../assets/images/new-icon4.svg) no-repeat center;
+      background-size: 50% 50%;
+    }
+       &.new-icon5{
+      background: url(../../assets/images/new-icon5.svg) no-repeat center;
+      background-size: 50% 50%;
+    }
+       &.new-icon6{
+      background: url(../../assets/images/new-icon6.svg) no-repeat center;
+      background-size: 50% 50%;
+    }
+  }
   .zjli {
-	display: flex;
-	text-align: left;
-	padding: 0 !important;
-  justify-content: flex-start;
+    display: flex;
+    text-align: left;
+    padding: 0 !important;
+    justify-content: flex-start;
 
-	span{
-    width: 200px;
-    font-size: 16px;
-		display: inline-block;
-	}
+    span {
+      width: 200px;
+      font-size: 16px;
+      display: inline-block;
+    }
     a {
       width: 100%;
       display: flex;
@@ -310,8 +342,8 @@ export default {
     transform: scale(1.2);
   }
 }
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item{
-  margin:15px 0;
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item {
+  margin: 15px 0;
 }
 </style>
 

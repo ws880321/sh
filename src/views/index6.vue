@@ -259,9 +259,9 @@ export default {
 
           let xData = res.data.map((v) => v.country);
           let yData = Array.from(legend).map((v) => []);
-          yData[0] = res.data.map((v) => v.newDiagnum);
+          yData[0] = res.data.map((v) => v.diagnum);
 
-          yData[1] = res.data.map((v) => v.diagnum);
+          yData[1] = res.data.map((v) => v.totaldiagnum);
           this.data1 = {
             legend: legend,
             xData: xData,

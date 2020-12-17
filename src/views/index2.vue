@@ -33,6 +33,7 @@
 <script>
 // import Map from "../components/map/indexpointer";
 
+import getData from "../assets/js/xhr/data2";
 import Map from "../components/map/olmap-pointer";
 
 export default {
@@ -40,6 +41,11 @@ export default {
     return {
       collapsed: false,
     };
+  },
+  mounted() {
+    getData().then((res) => {
+      console.log(res, 123);
+    });
   },
   components: {
     Map,
