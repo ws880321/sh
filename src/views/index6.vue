@@ -50,7 +50,15 @@
     </a-row>
     <!-- <zoom :dataYears="zm" @callBack="zoomchange" /> -->
     <Map />
-
+    <a-modal v-model="visible" :title="false" :footer="false">
+      <a-table
+        :columns="columns"
+        :data-source="data"
+        :pagination="false"
+        :scroll="{ y: 300 }"
+      >
+      </a-table>
+    </a-modal>
     <rightbar>
       <div class="r-box">
         <h3>
@@ -58,6 +66,7 @@
             src="../assets/images/指标统计icon.svg"
             alt=""
           />全球各国新增确诊及累计确诊数量
+          <a-icon type="ordered-list" @click="showList" />
         </h3>
         <div class="r-content">
           <BarChart :cdata="data1" v-if="data1" />
@@ -70,6 +79,7 @@
             src="../assets/images/指标变化趋势icon.svg"
             alt=""
           />全球各国死亡人数及治愈人数(万人)统计TOP10
+          <a-icon type="ordered-list" />
         </h3>
         <div class="r-content">
           <BarChart :cdata="data2" v-if="data2" />
@@ -158,9 +168,143 @@ export default {
       jb: [],
       zm: [],
       time: ["2019-12-12", "2020-12-12"],
+      visible: false,
+
+      columns: [
+        {
+          title: "序号",
+          dataIndex: "name",
+        },
+        {
+          title: "国家名称",
+          dataIndex: "age",
+          key: "age",
+          width: 80,
+        },
+        {
+          title: "新增数量（人）",
+          dataIndex: "address",
+          key: "address 1",
+        },
+        {
+          title: "累计数量（人）",
+          dataIndex: "address",
+          key: "address 2",
+        },
+      ],
+      data: [
+        {
+          key: "1",
+          name: "John Brown",
+          age: 32,
+          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
+          tags: ["nice", "developer"],
+        },
+        {
+          key: "2",
+          name: "Jim Green",
+          age: 42,
+          address: "London No. 2 Lake Park, London No. 2 Lake Park",
+          tags: ["loser"],
+        },
+        {
+          key: "3",
+          name: "Joe Black",
+          age: 32,
+          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+          tags: ["cool", "teacher"],
+        },
+        {
+          key: "1",
+          name: "John Brown",
+          age: 32,
+          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
+          tags: ["nice", "developer"],
+        },
+        {
+          key: "2",
+          name: "Jim Green",
+          age: 42,
+          address: "London No. 2 Lake Park, London No. 2 Lake Park",
+          tags: ["loser"],
+        },
+        {
+          key: "3",
+          name: "Joe Black",
+          age: 32,
+          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+          tags: ["cool", "teacher"],
+        },
+        {
+          key: "1",
+          name: "John Brown",
+          age: 32,
+          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
+          tags: ["nice", "developer"],
+        },
+        {
+          key: "2",
+          name: "Jim Green",
+          age: 42,
+          address: "London No. 2 Lake Park, London No. 2 Lake Park",
+          tags: ["loser"],
+        },
+        {
+          key: "3",
+          name: "Joe Black",
+          age: 32,
+          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+          tags: ["cool", "teacher"],
+        },
+        {
+          key: "1",
+          name: "John Brown",
+          age: 32,
+          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
+          tags: ["nice", "developer"],
+        },
+        {
+          key: "2",
+          name: "Jim Green",
+          age: 42,
+          address: "London No. 2 Lake Park, London No. 2 Lake Park",
+          tags: ["loser"],
+        },
+        {
+          key: "3",
+          name: "Joe Black",
+          age: 32,
+          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+          tags: ["cool", "teacher"],
+        },
+        {
+          key: "1",
+          name: "John Brown",
+          age: 32,
+          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
+          tags: ["nice", "developer"],
+        },
+        {
+          key: "2",
+          name: "Jim Green",
+          age: 42,
+          address: "London No. 2 Lake Park, London No. 2 Lake Park",
+          tags: ["loser"],
+        },
+        {
+          key: "3",
+          name: "Joe Black",
+          age: 32,
+          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+          tags: ["cool", "teacher"],
+        },
+      ],
     };
   },
   methods: {
+    showList() {
+      this.visible = true;
+    },
     // getData() {
     //   d1(this.jibing, ...this.time).then((res) => {
     //     this.topData = res.datas;

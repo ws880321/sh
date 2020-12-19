@@ -50,9 +50,9 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      polar: {
+  computed: {
+    polar: function() {
+      return {
         color: color,
         legend: {
           show: false,
@@ -62,6 +62,7 @@ export default {
             type: "pie",
             // radius: ["45%", "60%"],
             center: ["50%", "50%"],
+            radius: [0, "65%"],
             data: this.cdata,
             hoverAnimation: false,
             itemStyle: {
@@ -81,7 +82,6 @@ export default {
             label: {
               normal: {
                 formatter: (params) => {
-                  console.log(params);
                   return (
                     "{icon|●}{name|" +
                     params.data.name +
@@ -90,14 +90,14 @@ export default {
                     "%}"
                   );
                 },
-                padding: [0, -50, 25, -50],
+                padding: [0, -60, 25, -60],
                 rich: {
                   icon: {
                     fontSize: 12,
                   },
                   name: {
                     fontSize: 12,
-                    padding: [0, 10, 0, 4],
+                    padding: [0, 0, 0, 0],
                     color: "#666666",
                   },
                   value: {
@@ -110,8 +110,11 @@ export default {
             },
           },
         ],
-      },
-    };
+      };
+    },
+  },
+  data() {
+    return {};
   },
 };
 </script>

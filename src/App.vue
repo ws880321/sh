@@ -108,18 +108,28 @@ export default {
 
 .r-box {
   padding: 10px;
-  background: #fff;
-  margin-bottom: 8px;
+  background: #ffffff;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 3px #eee;
+  border-radius: 5px;
 
   > h3 {
     display: flex;
-    font-size: 14px;
+    font-size: 16px;
+    width: 100%;
     color: #000000;
     font-weight: normal;
     align-items: center;
-
+    position: relative;
+    i {
+      position: absolute;
+      right: 10px;
+      color: green;
+      cursor: pointer;
+      top: 3px;
+    }
     img {
       margin-right: 8px;
     }

@@ -69,7 +69,10 @@ export default {
             data: this.cdata.map((v) => v.name),
 
             axisLabel: {
-              interval: 0,
+              //坐标轴刻度标签的相关设置。
+              interval: 0, //设置为 1，表示『隔一个标签显示一个标签』
+              margin: 15,
+              rotate: 30,
             },
             axisTick: {
               alignWithLabel: true,
@@ -84,7 +87,7 @@ export default {
         series: [
           {
             type: "bar",
-            barWidth: "20%",
+            barWidth: "30%",
             data: this.cdata.map((v) => v.value),
           },
         ],

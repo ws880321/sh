@@ -29,7 +29,31 @@ export default {
     return {};
   },
   mounted() {},
-  props: ["data"],
+  props: {
+    type: {
+      type: String,
+      default: () => {
+        return "line";
+      },
+    },
+    data: {
+      type: Array,
+      default: () => {
+        return [
+          {
+            name: "北京",
+            tag: "116.4551, 40.2539",
+            value: 145,
+          },
+          {
+            name: "上海",
+            tag: "121.4648, 31.2891",
+            value: 145,
+          },
+        ];
+      },
+    },
+  },
   watch: {
     data: function(v) {
       if (v.length > 0) {
@@ -48,20 +72,13 @@ export default {
       }
     },
   },
+
   methods: {
-    move(map, data) {
-      var geoCoordMap = {
-        上海: [121.4648, 31.2891],
-        北京: [116.4551, 40.2539],
-      };
-
-      var BJData = [[{ name: "北京" }, { name: "上海", value: 95 }]];
-
+    series(type, data) {
       var planePath =
         "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
-
       var color = ["#a6c84c", "#ffa022", "#46bee9"];
-      var series = [
+      let lineSeries = [
         {
           type: "lines",
           zlevel: 1,
@@ -101,6 +118,8 @@ export default {
           },
           data: data,
         },
+      ];
+      let pointSeries = [
         {
           type: "effectScatter",
           zlevel: 3,
@@ -115,7 +134,14 @@ export default {
             },
           },
           symbolSize: function(val) {
-            return 10;
+            let v = 4 + val[2] / 10;
+            if (v > 18) {
+              return 18;
+            } else if (v > 10 && v < 18) {
+              return v;
+            } else {
+              return 10;
+            }
           },
           itemStyle: {
             normal: {
@@ -165,10 +191,25 @@ export default {
           ],
         },
       ];
-
+      let series = [];
+      if (type == "line") {
+        series = [...lineSeries, ...pointSeries];
+      } else {
+        series = [...pointSeries];
+      }
+      return series;
+    },
+    move(map, data) {
       var option = {
         tooltip: {
           trigger: "item",
+          formatter: function(params) {
+            if (typeof params.value[2] == "undefined") {
+              return params.name + " : " + params.value;
+            } else {
+              return params.name + " : " + params.value[2];
+            }
+          },
         },
         legend: {
           orient: "vertical",
@@ -179,17 +220,13 @@ export default {
           },
           selectedMode: "single",
         },
-        series: series,
+        series: this.series(this.type, data),
       };
       var oe = new ADLayer(option, map, echarts);
       oe.render();
     },
     pbfLayer() {
       var initStyle = new olstyleStyle({
-        // fill: new olstyleFill({
-        //     color: '#12563b'
-
-        // }),
         stroke: new olstyleStroke({
           color: "blue",
           width: 1,

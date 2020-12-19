@@ -8,7 +8,7 @@ const getData = (jd = "person_entry_disease_lxxgm", time = "2020-01-01,2020-03-0
     let p = {
         "classifyFilter": {
             "buildTree": false,
-            "code": "0001",
+            "code": "0002",
             "codes": [],
             "fuzzyCode": "",
             "fuzzyCodes": [],
@@ -25,9 +25,9 @@ const getData = (jd = "person_entry_disease_lxxgm", time = "2020-01-01,2020-03-0
             "useParentId": false,
             "useParentIds": false
         },
-        "districtCode": districtCode,//疾病是接口返回的数据下拉框选取的和全球疫情数据不一样需要注意一下
+        "districtCode": districtCode, //疾病是接口返回的数据下拉框选取的和全球疫情数据不一样需要注意一下
         "isUnion": false
     }
-    return xhr.post('/shanghaiexecute/execute', { ...p })
+    return xhr.post('/shanghaiexecute/execute', {...p })
 }
 export default getData

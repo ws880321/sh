@@ -1,7 +1,7 @@
 <template>
   <div class="wrap soli-map ">
-    <Map />
-    <div class="lebged">
+    <Map :data="mapData" type="point" />
+    <!-- <div class="lebged">
       <div class="item item1">
         <span class="icon"></span>
         <span class="label">5级以上</span>
@@ -27,24 +27,30 @@
         <span class="icon"></span>
         <span class="label">0-1级以上</span>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 // import Map from "../components/map/indexpointer";
 
 import getData from "../assets/js/xhr/data2";
-import Map from "../components/map/olmap-pointer";
+import Map from "../components/map/olmap";
 
 export default {
   data() {
     return {
       collapsed: false,
+      mapData: [],
     };
   },
   mounted() {
     getData().then((res) => {
-      console.log(res, 123);
+      if (res.code == 200) {
+        this.mapData = res.data[0].kpiItems[0].keyValues.filter((v) => {
+          return v.tag && v.tag != "1,1" && v.value;
+        });
+        console.log(this.mapData);
+      }
     });
   },
   components: {

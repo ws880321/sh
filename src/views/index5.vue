@@ -1,6 +1,6 @@
 <template>
   <div class="wrap soli-map">
-    <Map />
+    <Map :data="mapData" type="pointer" />
 
     <rightbar>
       <div class="r-box">
@@ -71,7 +71,7 @@
 </template>
 <script>
 import Map from "../components/map/olmap";
-import BarChart from "../components/echarts/dbbar";
+import BarChart from "../components/echarts/bar5";
 import LineChart from "../components/echarts/line";
 import getData from "../assets/js/xhr/data5";
 import rightbar from "../components/rightbar/index.vue";
@@ -83,6 +83,7 @@ export default {
       data1: null,
       data2: null,
       data3: null,
+      mapData: [],
     };
   },
   methods: {
@@ -116,78 +117,81 @@ export default {
   mounted() {
     getData().then((res) => {
       let data = res.data[0].kpiItems;
+      let dataValue = [];
+      this.mapData = [...data[0].keyValues];
       let legend = ["人员总量", "中转", "直达"];
       let xData = [];
       let yData = legend.map((v) => []);
       data[0].keyValues.map((v) => {
-        xData.push(v.id);
-        yData[0].push(v.name);
-        yData[1].push(v.tag);
-        yData[2].push(v.value);
+        xData.push(v.name);
+        yData[0].push(v.value);
+        yData[1].push(0);
+        yData[2].push(0);
       });
+      let newY = data[0].keyValues;
       this.data1 = { legend: legend, xData: xData, yData: yData };
 
-      let legend2 = new Set();
-      let xData2 = ["", "", "", ""];
-      data[1].keyValues.map((v, i) => {
-        legend2.add(v.name);
-      });
+      //   let legend2 = new Set();
+      //   let xData2 = ["", "", "", ""];
+      //   data[1].keyValues.map((v, i) => {
+      //     legend2.add(v.name);
+      //   });
 
-      let yData2 = Array.from(legend2).map((v) => []);
+      //   let yData2 = Array.from(legend2).map((v) => []);
 
-      Array.from(legend2).forEach((v, i) => {
-        yData2[i] = data[1].keyValues
-          .map((k) => {
-            if (v == k.name) {
-              return k.value;
-            }
-          })
-          .filter((v) => !!v);
-      });
-      this.data2 = {
-        legend: Array.from(legend2),
-        xData: xData2,
-        yData: yData2,
-      };
+      //   Array.from(legend2).forEach((v, i) => {
+      //     yData2[i] = data[1].keyValues
+      //       .map((k) => {
+      //         if (v == k.name) {
+      //           return k.value;
+      //         }
+      //       })
+      //       .filter((v) => !!v);
+      //   });
+      //   this.data2 = {
+      //     legend: Array.from(legend2),
+      //     xData: xData2,
+      //     yData: yData2,
+      //   };
 
-      let legend3 = new Set();
-      let xData3 = [
-        "10",
-        "20",
-        "30",
-        "40",
-        "50",
-        "60",
-        "70",
-        "80",
-        "90",
-        "100",
-      ];
-      data[2].keyValues.map((v, i) => {
-        legend3.add(v.name);
-      });
+      //   let legend3 = new Set();
+      //   let xData3 = [
+      //     "10",
+      //     "20",
+      //     "30",
+      //     "40",
+      //     "50",
+      //     "60",
+      //     "70",
+      //     "80",
+      //     "90",
+      //     "100",
+      //   ];
+      //   data[2].keyValues.map((v, i) => {
+      //     legend3.add(v.name);
+      //   });
 
-      let yData3 = Array.from(legend3).map((v) => []);
-      let length = 0;
-      Array.from(legend3).forEach((v, i) => {
-        console.log(v, i);
-        yData3[i] = [];
-        data[2].keyValues
-          .map((k) => {
-            if (k.name && v == k.name) {
-              length = k.value.split(",").length;
-              yData3[i] = k.value.split(",");
-            }
-          })
-          .filter((v) => !!v);
-      });
-      this.data3 = {
-        legend: Array.from(legend3),
-        xData: xData3.splice(0, length),
-        yData: yData3,
-      };
-      // this.data3 = this.getLineData(data[2]);
-      // console.log(this.data3);
+      //   let yData3 = Array.from(legend3).map((v) => []);
+      //   let length = 0;
+      //   Array.from(legend3).forEach((v, i) => {
+      //     console.log(v, i);
+      //     yData3[i] = [];
+      //     data[2].keyValues
+      //       .map((k) => {
+      //         if (k.name && v == k.name) {
+      //           length = k.value.split(",").length;
+      //           yData3[i] = k.value.split(",");
+      //         }
+      //       })
+      //       .filter((v) => !!v);
+      //   });
+      //   this.data3 = {
+      //     legend: Array.from(legend3),
+      //     xData: xData3.splice(0, length),
+      //     yData: yData3,
+      //   };
+      //   // this.data3 = this.getLineData(data[2]);
+      //   // console.log(this.data3);
     });
   },
   components: {
