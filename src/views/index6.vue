@@ -78,7 +78,7 @@
           <img
             src="../assets/images/指标变化趋势icon.svg"
             alt=""
-          />全球各国死亡人数及治愈人数(万人)统计TOP10
+          />全球各国死亡人数及治愈人数(万人)
           <a-icon type="ordered-list" />
         </h3>
         <div class="r-content">
@@ -173,130 +173,30 @@ export default {
       columns: [
         {
           title: "序号",
-          dataIndex: "name",
+          dataIndex: "key",
         },
         {
           title: "国家名称",
-          dataIndex: "age",
-          key: "age",
-          width: 80,
+          dataIndex: "name",
+          width: 120,
         },
         {
           title: "新增数量（人）",
-          dataIndex: "address",
+          dataIndex: "n1",
           key: "address 1",
         },
         {
           title: "累计数量（人）",
-          dataIndex: "address",
+          dataIndex: "n2",
           key: "address 2",
         },
       ],
       data: [
         {
           key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. 2 Lake Park, London No. 2 Lake Park",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-          tags: ["cool", "teacher"],
-        },
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. 2 Lake Park, London No. 2 Lake Park",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-          tags: ["cool", "teacher"],
-        },
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. 2 Lake Park, London No. 2 Lake Park",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-          tags: ["cool", "teacher"],
-        },
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. 2 Lake Park, London No. 2 Lake Park",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-          tags: ["cool", "teacher"],
-        },
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. 2 Lake Park, London No. 2 Lake Park",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
-          tags: ["cool", "teacher"],
+          name: "中国",
+          n2: 32,
+          n1: 32,
         },
       ],
     };

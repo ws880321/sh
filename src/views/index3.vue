@@ -30,6 +30,7 @@
       <div class="r-box" v-if="type == 1">
         <h3>
           <img src="../assets/images/指标统计icon.svg" alt="" />各个国家温度
+          <a-icon type="ordered-list" @click="showList" />
         </h3>
         <div class="r-content">
           <bar :cdata="data2" v-if="data2" />
@@ -52,6 +53,7 @@
       <div class="r-box" v-if="type == 2">
         <h3>
           <img src="../assets/images/建议icon.svg" alt="" />各个国家降水量
+          <a-icon type="ordered-list" @click="showList2" />
         </h3>
         <div class="r-content">
           <bar :cdata="data2" v-if="data2" />
@@ -69,6 +71,26 @@
         </div>
       </div>
     </rightbar>
+    <a-modal v-model="visible" :title="false" :footer="false">
+      <a-table
+        :columns="columns"
+        :data-source="data"
+        :pagination="false"
+        :scroll="{ y: 300 }"
+        bordered
+      >
+      </a-table>
+    </a-modal>
+    <a-modal v-model="visible2" :title="false" :footer="false">
+      <a-table
+        :columns="columns2"
+        :data-source="data22"
+        :pagination="false"
+        :scroll="{ y: 300 }"
+        bordered
+      >
+      </a-table>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -88,9 +110,49 @@ export default {
       data3: [],
       data4: [],
       points: [],
+      visible: false,
+      columns: [
+        {
+          title: "序号",
+          dataIndex: "index",
+        },
+        {
+          title: "国家名称",
+          dataIndex: "name",
+          width: 120,
+        },
+        {
+          title: "温度（℃）",
+          dataIndex: "value",
+        },
+      ],
+      data: [],
+      visible2: false,
+      columns2: [
+        {
+          title: "序号",
+          dataIndex: "index",
+        },
+        {
+          title: "国家名称",
+          dataIndex: "name",
+          width: 120,
+        },
+        {
+          title: "降雨量（㎜）",
+          dataIndex: "value",
+        },
+      ],
+      data2: [],
     };
   },
   methods: {
+    showList() {
+      this.visible = true;
+    },
+    showList2() {
+      this.visible2 = true;
+    },
     selectChange(e) {
       this.type = e;
     },
@@ -131,7 +193,18 @@ export default {
         //   v.value = v.value ? v.value : 0;
         //   return v;
         // });
-
+        this.data = [
+          ...data[3].keyValues.map((v, index) => {
+            v.index = index + 1;
+            return v;
+          }),
+        ];
+        this.data22 = [
+          ...data[1].keyValues.map((v, index) => {
+            v.index = index + 1;
+            return v;
+          }),
+        ];
         this.data1 = this.getLineData(data[2]);
         let arr = data[3].keyValues
           .sort((a, b) => b.value - a.value)

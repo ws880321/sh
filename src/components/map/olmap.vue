@@ -57,6 +57,7 @@ export default {
   watch: {
     data: function(v) {
       if (v.length > 0) {
+        console.log(v, 99);
         let coordsdata = [];
         v.map((v, index) => {
           if (index > 0) {
@@ -289,6 +290,10 @@ export default {
           new TileLayer({
             source: new XYZ({
               url: "http://222.128.56.122:8081/wordIMG/{z}/{x}/{y}.jpg",
+
+              // url:
+              // "http://t3.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=56618c6e3603f212a8b25b0607b2dca1",
+              // "http://webrd03.is.autonavi.com/appmaptile?size=1&scale=1&style=8&x={x}&y={y}&z={z}",
             }),
           }),
           // this.pbfLayer(),

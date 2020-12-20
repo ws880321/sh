@@ -13,6 +13,7 @@
             src="../assets/images/指标统计icon.svg"
             alt=""
           />全球各国入境的航班数量统计
+          <a-icon type="ordered-list" @click="showList" />
         </h3>
         <div class="r-content">
           <BarChart :cdata="data1" v-if="data1.length" />
@@ -56,6 +57,16 @@
         </div> 
       </div> -->
     </rightbar>
+    <a-modal v-model="visible" :title="false" :footer="false">
+      <a-table
+        :columns="columns"
+        :data-source="data"
+        :pagination="false"
+        :scroll="{ y: 300 }"
+        bordered
+      >
+      </a-table>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -75,9 +86,29 @@ export default {
       data3: [],
       mapData: [],
       time: "2020-10-27,2020-10-30",
+      visible: false,
+      columns: [
+        {
+          title: "序号",
+          dataIndex: "index",
+        },
+        {
+          title: "国家名称",
+          dataIndex: "name",
+          width: 120,
+        },
+        {
+          title: "航班数量（人）",
+          dataIndex: "value",
+        },
+      ],
+      data: [],
     };
   },
   methods: {
+    showList() {
+      this.visible = true;
+    },
     timeChange(a, e) {
       this.time = e.join();
       this.upData(this.time);
@@ -111,6 +142,12 @@ export default {
       getData(time).then((res) => {
         let data = res.data[0].kpiItems;
         this.mapData = [...data[0].keyValues];
+        this.data = [
+          ...data[0].keyValues.map((v, index) => {
+            v.index = index + 1;
+            return v;
+          }),
+        ];
         if (data[0].keyValues.length > 10) {
           this.data1 = data[0].keyValues.splice(0, 9);
         } else {

@@ -9,6 +9,8 @@
             src="../assets/images/指标统计icon.svg"
             alt=""
           />全球各国入境航班人员总量
+
+          <a-icon type="ordered-list" @click="showList" />
         </h3>
         <div class="r-content">
           <BarChart :cdata="data1" v-if="data1" />
@@ -67,6 +69,16 @@
         </a-card>
       </div>
     </div> -->
+    <a-modal v-model="visible" :title="false" :footer="false">
+      <a-table
+        :columns="columns"
+        :data-source="data"
+        :pagination="false"
+        :scroll="{ y: 300 }"
+        bordered
+      >
+      </a-table>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -84,9 +96,29 @@ export default {
       data2: null,
       data3: null,
       mapData: [],
+      visible: false,
+      columns: [
+        {
+          title: "序号",
+          dataIndex: "index",
+        },
+        {
+          title: "国家名称",
+          dataIndex: "name",
+          width: 120,
+        },
+        {
+          title: "人员总量（人）",
+          dataIndex: "value",
+        },
+      ],
+      data: [],
     };
   },
   methods: {
+    showList() {
+      this.visible = true;
+    },
     getLineData(data) {
       let legend = new Set();
       let xData = new Set();
@@ -117,7 +149,12 @@ export default {
   mounted() {
     getData().then((res) => {
       let data = res.data[0].kpiItems;
-      let dataValue = [];
+      this.data = [
+        ...data[0].keyValues.map((v, index) => {
+          v.index = index + 1;
+          return v;
+        }),
+      ];
       this.mapData = [...data[0].keyValues];
       let legend = ["人员总量", "中转", "直达"];
       let xData = [];

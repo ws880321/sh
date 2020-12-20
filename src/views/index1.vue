@@ -24,7 +24,7 @@
             src="../assets/images/指标统计icon.svg"
             alt=""
           />各海关截获的确诊人员发展趋势
-          <a-icon type="ordered-list" />
+          <a-icon type="ordered-list" @click="showList" />
         </h3>
         <div class="r-content">
           <Pie :cdata="data1" v-if="data1.length" />
@@ -56,6 +56,16 @@
         </div>
       </div>
     </rightbar>
+    <a-modal v-model="visible" :title="false" :footer="false">
+      <a-table
+        :columns="columns"
+        :data-source="data"
+        :pagination="false"
+        :scroll="{ y: 300 }"
+        bordered
+      >
+      </a-table>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -82,9 +92,29 @@ export default {
       zm: [],
       jibing: "person_entry_disease_lxxgm",
       time: "2020-01-01,2020-12-01",
+      visible: false,
+      columns: [
+        {
+          title: "序号",
+          dataIndex: "index",
+        },
+        {
+          title: "海关名称",
+          dataIndex: "name",
+          width: 120,
+        },
+        {
+          title: "人员总量（人）",
+          dataIndex: "value",
+        },
+      ],
+      data: [],
     };
   },
   methods: {
+    showList() {
+      this.visible = true;
+    },
     selectChange(e) {
       this.upData(e, this.time);
     },
@@ -127,6 +157,12 @@ export default {
           v.value = v.value ? v.value : 0;
           return v;
         });
+        this.data = [
+          ...data[1].keyValues.map((v, index) => {
+            v.index = index + 1;
+            return v;
+          }),
+        ];
         let data3 = data[2].keyValues;
         let names = new Set();
         let tags = new Set();
